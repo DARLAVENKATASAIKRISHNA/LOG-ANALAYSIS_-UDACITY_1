@@ -1,4 +1,4 @@
-# ! /usr/bin/env python3
+#!/usr/bin/env python3
 
 import psycopg2
 DB_NAME = "news"
@@ -38,8 +38,11 @@ lead to an error:\n"""
 
 # returns query result
 def queryresult(query):
-    db = psycopg2.connect(database=DB_NAME)
-    c = db.cursor()
+    try:
+        db = psycopg2.connect(database=DB_NAME)
+        c = db.cursor()
+    except:
+        print("Cannot connect to database")
     c.execute(elview)
     c.execute(artiview)
     c.execute(query)
